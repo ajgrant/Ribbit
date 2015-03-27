@@ -1,10 +1,14 @@
 package com.example.aj.ribbit;
 
 import android.app.AlertDialog;
+import android.app.ListActivity;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -18,27 +22,22 @@ import com.parse.ParseUser;
 
 import java.util.List;
 
-/**
- * Created by aj on 3/23/15.
- */
-public class FriendsFragment extends ListFragment {
 
-    public static final String TAG = FriendsFragment.class.getSimpleName();
+public class RecipientsActivity extends ListActivity {
+
+    public static final String TAG = RecipientsActivity.class.getSimpleName();
 
     protected List<ParseUser> mFriends;
     protected ParseRelation<ParseUser> mFriendsRelation;
     protected ParseUser mCurrentUser;
+    protected MenuItem mSendMenuItem;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_recipients);
+        getActionBar().setDisplayHomeAsUpEnabled(true);
 
-        View rootView = inflater.inflate(R.layout.fragment_friends, container, false);
-
-        return rootView;
-    }
-
-    public void onResume() {
-        super.onResume();
         mCurrentUser = ParseUser.getCurrentUser();
         mFriendsRelation = mCurrentUser.getRelation(ParseConstants.KEY_FRIENDS_RELATION);
 
@@ -58,14 +57,14 @@ public class FriendsFragment extends ListFragment {
                     }
                     ArrayAdapter<String> adapter = new ArrayAdapter<String>(
                             getListView().getContext(),
-                            android.R.layout.simple_list_item_1,
+                            android.R.layout.simple_list_item_checked,
                             usernames);
                     setListAdapter(adapter);
                     getListView().setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
                 }
                 else {
                     Log.e(TAG, e.getMessage());
-                    AlertDialog.Builder builder = new AlertDialog.Builder(getListView().getContext());
+                    AlertDialog.Builder builder = new AlertDialog.Builder(RecipientsActivity.this);
                     builder.setMessage(e.getMessage())
                             .setTitle(R.string.error_title)
                             .setPositiveButton(android.R.string.ok, null);
@@ -74,6 +73,42 @@ public class FriendsFragment extends ListFragment {
                 }
             }
         });
+    }
+
+    @Override
+    protected void onListItemClick(ListView l, View v, int position, long id) {
+        super.onListItemClick(l, v, position, id);
+
+        if (l.getCheckedItemCount() > 0) {
+            mSendMenuItem.setVisible(true);
+        }
+        else {
+            mSendMenuItem.setVisible(false);
+        }
 
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_recipients, menu);
+        mSendMenuItem =menu.getItem(0);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
 }

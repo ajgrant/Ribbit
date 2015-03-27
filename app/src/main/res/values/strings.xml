@@ -25,6 +25,21 @@
     <string name="empty_inbox_label">No New Messages</string>
     <string name="empty_friends_label">Add Friends To Begin</string>
     <string name="title_activity_edit_friends">Edit Friends</string>
-    <string name="menu_edit_friends_label">Friends</string>
+    <string name="menu_edit_friends_label">Edit Friends</string>
     <string name="error_title">We\'re sorry!</string>
+    <string name="menu_camera_label">Camera</string>
+    <string-array name="camera_choices">
+        <item>Take Picture</item>
+        <item>Take Video</item>
+        <item>Choose Picture</item>
+        <item>Choose Video</item>
+    </string-array>
+    <string name="error_storage">There was a problem accessing your device\'s storage</string>
+    <string name="error_general">Sorry the was an error</string>
+    <string name="video_file_size_warning">The video must be smaller than 10 MB</string>
+    <string name="error_opening_file">There was a problem with the selected file</string>
+    <string name="error_file_size_too_large">The video is too big</string>
+    <string name="title_activity_recipients">Choose Recipients</string>
+    <string name="empty_recipients_list_message">Choose some friends first</string>
+    <string name="menu_send_label">Send</string>
 </resources>
