@@ -92,7 +92,7 @@ public class RecipientsActivity extends ListActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_recipients, menu);
-        mSendMenuItem =menu.getItem(0);
+        mSendMenuItem = menu.getItem(0);
         return true;
     }
 
