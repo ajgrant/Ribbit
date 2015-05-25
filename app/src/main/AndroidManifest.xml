@@ -53,10 +53,19 @@
             android:label="@string/title_activity_recipients"
             android:parentActivityName=".MainActivity"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Holo.Light">
+            android:theme="@android:style/Theme.Holo.Light" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.aj.ribbit.MainActivity" />
+        </activity>
+        <activity
+            android:name=".ViewImageActivity"
+            android:label="@string/title_activity_view_image"
+            android:parentActivityName=".MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.aj.ribbit.MainActivity"
+                android:screenOrientation="portrait"/>
         </activity>
     </application>
 
